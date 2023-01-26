@@ -21,7 +21,7 @@ DBLOGIN = os.environ.get('DBLOGIN')
 DBADDR = os.environ.get('DBADDR')
 
 # Create engine with database
-engine = create_engine(f"postgresql+psycopg2://{DBLOGIN}@{DBADDR}/{uc.DBNAME}", echo=uc.DEBUG)
+engine = create_engine(f"{uc.DBDIALECT}://{DBLOGIN}@{DBADDR}/{uc.DBNAME}", echo=uc.DEBUG)
 
 def default_status_id():
     '''Function that returns default status id for every new order'''

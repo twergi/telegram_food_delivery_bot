@@ -11,6 +11,9 @@ DBNAME: str = os.environ.get('DBNAME')
 # Directory of project
 BASE_DIR: str = os.path.dirname(os.path.realpath(__file__))
 
+# Set dialect and driver for you database (https://docs.sqlalchemy.org/en/20/core/engines.html#database-urls)
+DBDIALECT = "postgresql+psycopg2"
+
 # Font configuration for orders image
 FONT_SIZE: int = 24
 FONT_FILENAME: str = 'consolas.ttf'  # name of chosen font file in utils/resources
