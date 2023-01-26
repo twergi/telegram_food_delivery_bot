@@ -21,7 +21,7 @@ This bot helps to create food delivery service from restaurants in city.
 5. Configure statuses (optional), timezones and database dialect in `utils/constants.py`
 6. Alter messages text according to your preferences in `utils/text.py`
 7. Create database with `create_database.py` (you can always drop it with `drop_database.py`)
-8. Start bot via `start_bot.py` in root derictory
+8. Start bot via `start_bot.py` in root directory
 9. Provided `DEVELOPER_ID` will be used to create first admin user
 
 ## Commands list
