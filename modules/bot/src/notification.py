@@ -77,15 +77,22 @@ async def sendOrderRequest(update: Update, order_id: int):
     )  # crate keyboard to respond on order request
 
     try:
-        bot_in_chat = await update._bot.get_chat_member(uc.CHAT_ID, update._bot.id)  # try to get bot in chat to ensure that he can send message
-        if bot_in_chat:  # if bot is in chat
-            chat_id = uc.CHAT_ID  # set target chat
-        else:  # if bot is not found in chat
-            chat_id = uc.DEVELOPER_ID  # set target chat
-            await update._bot.send_message(
-                chat_id=uc.DEVELOPER_ID,
-                text='Bot not found in chat'
-            )  # send error to developer
+        if uc.DEBUG:
+            chat_id = uc.DEVELOPER_ID
+            
+        else:
+            bot_in_chat = await update._bot.get_chat_member(uc.CHAT_ID, update._bot.id)  # try to get bot in chat to ensure that he can send message
+            
+            if bot_in_chat:  # if bot is in chat
+                chat_id = uc.CHAT_ID  # set target chat
+
+            else:  # if bot is not found in chat
+                chat_id = uc.DEVELOPER_ID  # set target chat
+                await update._bot.send_message(
+                    chat_id=uc.DEVELOPER_ID,
+                    text='Bot not found in chat'
+                )  # send error to developer
+
     except Exception as er:
         chat_id = uc.DEVELOPER_ID  # set target chat
         await update._bot.send_message(
