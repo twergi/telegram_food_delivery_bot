@@ -40,7 +40,10 @@ def main():
         CommandHandler('cancel', default.cancelHandler),  # stops conversation
         MessageHandler(filters.COMMAND & ~filters.Text('/help'), default.endConversation),  # ends conversation if another command starts
         MessageHandler(~filters.COMMAND, error.messageHandler),  # message handler to notify user that text is not recognized
-        CallbackQueryHandler(error.uncatchedCallbackHandler)  # callback handler to catch all unanswered callbacks
+        CallbackQueryHandler(
+            error.uncatchedCallbackHandler,
+            pattern=lambda data: data['value'] not in ['-ORDER_CONFIRM-', '-ORDER_CANCEL-']
+        )  # callback handler to catch all unanswered callbacks
     ]
 
     user_conversation = ConversationHandler(
