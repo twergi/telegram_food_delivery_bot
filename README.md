@@ -24,5 +24,7 @@ This bot helps to create food delivery service from restaurants in city.
 8. Start bot via `start_bot.py` in root directory
 9. Provided `DEVELOPER_ID` will be used to create first admin user
 
+To get `CHAT_ID`, bot can be started in `DEBUG` and added to group chat. After adding bot will reply with message information.
+
 ## Commands list
 Commands list for users and for managers (if user is manager) can be viewed with `/help` command
