@@ -3,7 +3,7 @@ import os
 
 
 # If True, enables SQL logging, all notifications are sent to developer
-DEBUG: bool = True
+DEBUG: bool = True if os.environ.get('DEBUG') == 'True' else False
 
 # Name of the database
 DBNAME: str = os.environ.get('DBNAME')

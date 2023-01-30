@@ -1,13 +1,14 @@
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 from telegram import ReplyKeyboardMarkup, ReplyKeyboardRemove, Update
+from telegram.constants import ChatType
 from telegram.ext import ContextTypes
+from telegram.ext.filters import MessageFilter
 
 from modules.bot import config as bc
 from modules.bot.src import cart, lobby, order
 from modules.database import config as dbc
 from utils import text as ut
-
 
 txt_dct = ut.messages  # dictionary of message texts
 
@@ -107,4 +108,17 @@ async def helpMessage(update: Update, context: ContextTypes.DEFAULT_TYPE):
         txt = txt_dct['help_manager'] # text for next message
         await user.send_message(txt) # send message with help for manager
     
+    return None
+
+class GroupChatFilter(MessageFilter):
+    def filter(self, message):
+        return message.chat.type == ChatType.GROUP
+
+GROUP_CHAT_FILTER = GroupChatFilter()
+
+async def messageInfo(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    '''Replies with message information'''
+    msg = update.message  # shortcut for message
+
+    await msg.reply_text(msg)  # reply to message with its information
     return None

@@ -7,6 +7,7 @@ from telegram.ext import (Application, CallbackQueryHandler, CommandHandler,
 
 from modules.bot.src import (cart, default, dish, error, lobby, manage_db,
                              notification, order, restaurant, user_orders)
+from utils import constants as uc
 from utils import text as ut
 
 
@@ -345,6 +346,16 @@ def main():
     application.add_error_handler(
         error.error_handler
     )
+
+    if uc.DEBUG:
+        # Replies on messages from notifications chat
+        # Needed to get chat id
+        application.add_handler(
+            MessageHandler(
+                default.GROUP_CHAT_FILTER,
+                default.messageInfo
+            )
+        )
     
     # Run bot until Ctrl+C
     application.run_polling()
