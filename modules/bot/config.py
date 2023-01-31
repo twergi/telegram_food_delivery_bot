@@ -49,7 +49,7 @@ def main():
 
     user_conversation = ConversationHandler(
         entry_points=[
-            CommandHandler('start', default.startHandler)  # conversation starts by /start command
+            CommandHandler('start', default.startHandler, ~default.GROUP_CHAT_FILTER)  # conversation starts by /start command
         ],
         states={
             LOBBY: [
@@ -189,14 +189,14 @@ def main():
 
     manager_conversation = ConversationHandler(
         entry_points=[
-            CommandHandler('order', manage_db.findOrder),
-            CommandHandler('orders', manage_db.showOrders),
-            CommandHandler('user', manage_db.findUser),
-            CommandHandler('users', manage_db.lastUsers),
-            CommandHandler('restaurant', manage_db.findRestaurant),
-            CommandHandler('new_restaurant', manage_db.createNewRestaurant),
-            CommandHandler('new_category', manage_db.createNewDishCategory),
-            CommandHandler('new_dish', manage_db.createNewDish)
+            CommandHandler('order', manage_db.findOrder, ~default.GROUP_CHAT_FILTER),
+            CommandHandler('orders', manage_db.showOrders, ~default.GROUP_CHAT_FILTER),
+            CommandHandler('user', manage_db.findUser, ~default.GROUP_CHAT_FILTER),
+            CommandHandler('users', manage_db.lastUsers, ~default.GROUP_CHAT_FILTER),
+            CommandHandler('restaurant', manage_db.findRestaurant, ~default.GROUP_CHAT_FILTER),
+            CommandHandler('new_restaurant', manage_db.createNewRestaurant, ~default.GROUP_CHAT_FILTER),
+            CommandHandler('new_category', manage_db.createNewDishCategory, ~default.GROUP_CHAT_FILTER),
+            CommandHandler('new_dish', manage_db.createNewDish, ~default.GROUP_CHAT_FILTER)
         ],
         states={
             M_ORDER: [
@@ -339,7 +339,7 @@ def main():
     
     # Handler to show help to users and managers
     application.add_handler(
-        CommandHandler('help', default.helpMessage)
+        CommandHandler('help', default.helpMessage, ~default.GROUP_CHAT_FILTER)
     )
 
     # Handler that sends messages to developer on errors
